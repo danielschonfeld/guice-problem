@@ -20,9 +20,9 @@ public class MyProdProject {
 
         topologyBuilder.setBolt("bolt", new MyBolt(), 10).shuffleGrouping("spout");
 
-        SubmitOptions so = new SubmitOptions();
-        so.set_initial_status();
-        StormSubmitter.submitTopologyWithProgressBar("log-test-topology", c, topologyBuilder.createTopology());
+        SubmitOptions so = new SubmitOptions(TopologyInitialStatus.INACTIVE);
+
+        StormSubmitter.submitTopologyWithProgressBar("log-test-topology", c, topologyBuilder.createTopology(), so);
 
     }
 }
